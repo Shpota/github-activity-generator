@@ -1,7 +1,5 @@
-GitHub Activity Generator
+GitHub Activity Generator [![Gitter](https://badges.gitter.im/github-activity-generator/community.svg)](https://gitter.im/github-activity-generator/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.com/Shpota/github-activity-generator.svg?branch=master)](https://travis-ci.com/Shpota/github-activity-generator)
 =========================
-[![Gitter](https://badges.gitter.im/github-activity-generator/community.svg)](https://gitter.im/github-activity-generator/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Build Status](https://travis-ci.com/Shpota/github-activity-generator.svg?branch=master)](https://travis-ci.com/Shpota/github-activity-generator)
 
 A script that helps you *instantly* generate a beautiful GitHub Activity Graph
 for the last year.
