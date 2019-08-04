@@ -1,5 +1,6 @@
 GitHub Activity Generator
 =========================
+[![Build Status](https://travis-ci.com/Shpota/github-activity-generator.svg?branch=master)](https://travis-ci.com/Shpota/github-activity-generator)
 
 A script that helps you *instantly* generate a beautiful GitHub Activity Graph
 for the last year.
@@ -26,7 +27,7 @@ per day). Once the commits are generated it links the created repository with
 the remote repository and pushes the changes.
 
 ## Going incognito
-None wants anybody to know that they are cheating. That is why the best option 
+No one wants anybody to know that they are cheating. That is why the best option 
 is making the generated repository private. It is free on GitHub. You only need
 to set up your account 
 [to show private contributions](https://help.github.com/en/articles/publicizing-or-hiding-your-private-contributions-on-your-profile).
