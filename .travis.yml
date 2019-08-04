@@ -1,0 +1,12 @@
+dist: xenial
+language: python
+python:
+  - "2.7"
+  - "3.7"
+
+install:
+  - pip install flake8
+
+script:
+  - python -m py_compile contribute.py
+  - flake8 --ignore=E501 contribute.py
