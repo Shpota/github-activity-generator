@@ -4,9 +4,15 @@ GitHub Activity Generator [![Gitter](https://badges.gitter.im/github-activity-ge
 A script that helps you *instantly* generate a beautiful GitHub Activity Graph
 for the last year.
 
-### Before :neutral_face: :no_mouth: :unamused: 
+
+
+
+
+
+
+## Before :neutral_face: :no_mouth: :unamused: 
 ![Before](images/before.png)
-### After :muscle: :relieved: :heart: :sunglasses: :metal: :horse: :wink: :fire: :dancer: :santa: :fireworks: :cherries: :tada:
+## After :muscle: :relieved: :heart: :sunglasses: :metal: :horse: :wink: :fire: :dancer: :santa: :fireworks: :cherries: :tada:
 ![After](images/after.png)
 
 ## How to use
