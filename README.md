@@ -33,17 +33,19 @@ to set up your account
 This way GitHub users will see that you made some changes, but they won't be
 able to see what exactly was changed.
 
-
 ## Customizations
-You can customize how often to commit and how many commits a day to make.
+You can customize how often to commit and how many commits a day to make, etc.
 
 For instance, with the following command, the script will make from 1 to 12 
 commits a day. It will commit 60% days a year.
 ```sh
 python contribute.py --max_commits=12 --frequency=60 --repository=git@github.com:user/repo.git
 ```
-
-If you do not set the `--repository` argument the script won't push changes. 
+Use `--no_weekends` option if you don't want to commit on weekends
+```sh
+python contribute.py --no_weekends
+```
+If you do not set the `--repository` argument the script won't push the changes. 
 This way you can import the generated repository yourself.
 
 Run `python contribute.py --help` to get help.
