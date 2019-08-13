@@ -16,12 +16,13 @@ def main():
         start = repository.rfind('/') + 1
         end = repository.rfind('.')
         directory = repository[start:end]
-
+    no_weekends = args.no_weekends
+    frequency = args.frequency
     os.mkdir(directory)
     perform(['git', 'init'], directory)
     start_date = current_datetime.replace(hour=20, minute=0) - timedelta(366)
     for day in (start_date + timedelta(n) for n in range(366)):
-        if randint(0, 100) < args.frequency:
+        if (not no_weekends or day.weekday() < 5) and randint(0, 100) < frequency:
             for commit_time in (day + timedelta(minutes=m) for m in range(contributions_per_day(args))):
                 contribute(commit_time, directory)
 
@@ -58,6 +59,8 @@ def contributions_per_day(args):
 
 def arguments():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-nw', '--no_weekends', required=False, action='store_true', default=False,
+                        help="""do not commit on weekends""")
     parser.add_argument('-mc', '--max_commits', type=int, default=10, required=False,
                         help="""Defines the maximum amount of commits a day the script can make.
                         Accepts a number from 1 to 20. If N is specified the script commits
