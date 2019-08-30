@@ -9,4 +9,4 @@ install:
 
 script:
   - python -m py_compile contribute.py
-  - flake8 --ignore=E501 contribute.py
+  - flake8 contribute.py
