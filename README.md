@@ -1,83 +1,118 @@
-GitHub Activity Generator [![Gitter](https://badges.gitter.im/github-activity-generator/community.svg)](https://gitter.im/github-activity-generator/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.com/Shpota/github-activity-generator.svg?branch=master)](https://travis-ci.com/Shpota/github-activity-generator)
-=========================
+# GitHub Activity Generator [![Gitter](https://badges.gitter.im/github-activity-generator/community.svg)](https://gitter.im/github-activity-generator/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.com/Shpota/github-activity-generator.svg?branch=master)](https://travis-ci.com/Shpota/github-activity-generator)
 
-A script that helps you *instantly* generate a beautiful GitHub Activity Graph
+A script that helps you _instantly_ generate a beautiful GitHub Activity Graph
 for the last year.
 
-### Before :neutral_face: :no_mouth: :unamused: 
+### Before :neutral_face: :no_mouth: :unamused:
+
 ![Before](images/before.png)
+
 ### After :muscle: :relieved: :heart: :sunglasses: :metal: :horse: :wink: :fire: :dancer: :santa: :fireworks: :cherries: :tada:
+
 ![After](images/after.png)
 
 ## How to use
+
 1. Create an empty GitHub repository. Do not initialize it.
-2. Download [the contribute.py script](https://github.com/Shpota/github-activity-generator/archive/master.zip) 
-and execute it passing the link on the created repository
+2. Download [the contribute.py script](https://github.com/Shpota/github-activity-generator/archive/master.zip)
+   and execute it passing the link on the created repository
+
 ```sh
 python contribute.py --repository=git@github.com:user/repo.git
 ```
+
 Now you have a repository with lots of changes in your GitHub account.
 Note: it takes several minutes for GitHub to reindex your activity.
 
 ## How it works
-The script initializes an empty git repository, creates a text file and starts 
-generating changes to the file for every day within the last year (0-20 commits 
+
+The script initializes an empty git repository, creates a text file and starts
+generating changes to the file for every day within the last year (0-20 commits
 per day). Once the commits are generated it links the created repository with
 the remote repository and pushes the changes.
 
 ## Going incognito
-No one wants anybody to know that they are cheating. That is why the best option 
+
+No one wants anybody to know that they are cheating. That is why the best option
 is making the generated repository private. It is free on GitHub. You only need
-to set up your account 
+to set up your account
 [to show private contributions](https://help.github.com/en/articles/publicizing-or-hiding-your-private-contributions-on-your-profile).
 This way GitHub users will see that you made some changes, but they won't be
 able to see what exactly was changed.
 
 ## Customizations
+
 You can customize how often to commit and how many commits a day to make, etc.
 
-For instance, with the following command, the script will make from 1 to 12 
-commits a day. It will commit 60% days a year.
+For instance, with the following command, the script will make from 1 to 12
+commits a day. It will commit 60% of 100 days.
+
 ```sh
-python contribute.py --max_commits=12 --frequency=60 --repository=git@github.com:user/repo.git
+python contribute.py --max_commits=12 --frequency=60 --start_date=100 --repository=https://github.com/user/repo.git
 ```
+
 Use `--no_weekends` option if you don't want to commit on weekends
+
 ```sh
 python contribute.py --no_weekends
 ```
-If you do not set the `--repository` argument the script won't push the changes. 
+
+Use `--start_date` option to specify how many days ago the commit start
+
+```sh
+python contribute.py --start_date=10
+```
+
+Use `--update` option if you want to generate commits on an initialized Github repository
+
+```sh
+python contribute.py --update
+```
+
+If you do not set the `--repository` argument the script won't push the changes.
 This way you can import the generated repository yourself.
 
 Run `python contribute.py --help` to get help.
 
 ## System requirements
+
 To be able to execute the script you need to have Python and Git installed.
 
 ## Troubleshooting
+
 #### I performed the script but my GitHub activity is still the same.
+
 It might take several minutes for GitHub to reindex your activity. Check
 if the repository has new commits and wait a couple of minutes.
+
 #### The changes are still not reflected after some time.
+
 Are you using a private repository? If so, enable showing private contributions
 [following this guide](https://help.github.com/en/articles/publicizing-or-hiding-your-private-contributions-on-your-profile).
 
 #### Still no luck
+
 Make sure the email address you have in GitHub is the same as you have in
-your local settings. GitHub counts contributions only when they are made 
+your local settings. GitHub counts contributions only when they are made
 using the corresponding email.
 
 Check your local email settings with:
+
 ```
 git config --get user.email
 ```
+
 If it doesn't match with the one from GitHub reset it with
+
 ```
 git config --global user.email "user@example.com"
 ```
+
 Create a new repository and rerun the script.
 
 #### There are errors in the logs of the script.
+
 Maybe you tried to use an existing repository. If so, make sure you are using
-a new one which is *not initialized*.
+a new one which is _not initialized_.
 
 **If none of the options helped, open an issue and I will fix it as soon as possible.**

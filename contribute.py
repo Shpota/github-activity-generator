@@ -18,11 +18,20 @@ def main():
         directory = repository[start:end]
     no_weekends = args.no_weekends
     frequency = args.frequency
-    os.mkdir(directory)
-    os.chdir(directory)
-    run(['git', 'init'])
-    start_date = curr_date.replace(hour=20, minute=0) - timedelta(366)
-    for day in (start_date + timedelta(n) for n in range(366)):
+    minus_date = args.start_date
+    to_update = args.update
+    
+    if bool(to_update):
+        run(['git', 'clone', repository])
+        os.chdir(directory)
+        run(['git', 'pull', 'origin', 'master'])
+    else:
+        os.mkdir(directory)
+        os.chdir(directory)
+        run(['git', 'init'])
+        
+    start_date = curr_date.replace(hour=20, minute=0) - timedelta(minus_date)
+    for day in (start_date + timedelta(n) for n in range(minus_date)):
         if (not no_weekends or day.weekday() < 5) \
                 and randint(0, 100) < frequency:
             for commit_time in (day + timedelta(minutes=m)
@@ -30,8 +39,11 @@ def main():
                 contribute(commit_time)
 
     if repository is not None:
-        run(['git', 'remote', 'add', 'origin', repository])
-        run(['git', 'push', '-u', 'origin', 'master'])
+        if bool(to_update): 
+            run(['git', 'push', 'origin', 'master'])
+        else:
+            run(['git', 'remote', 'add', 'origin', repository])
+            run(['git', 'push', '-u', 'origin', 'master'])
 
     print('\nRepository generation ' +
           '\x1b[6;30;42mcompleted successfully\x1b[0m!')
@@ -85,6 +97,10 @@ def arguments():
                         to the repository. The link is accepted in SSH or HTTPS
                         format. For example: git@github.com:user/repo.git or
                         https://github.com/user/repo.git""")
+    parser.add_argument('-sd', '--start_date', type=int, default=366,
+                        required=False, help="""Defines the start date of commit""")
+    parser.add_argument('-u', '--update', action='store_true', default=False,
+                        required=False, help="""Wheather is to update existing git""")
     return parser.parse_args()
 
 
