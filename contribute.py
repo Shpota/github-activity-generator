@@ -37,7 +37,7 @@ def main():
                 contribute(commit_time)
 
     if repository is not None:
-        if bool(to_update): 
+        if bool(to_update):
             run(['git', 'push', 'origin', 'master'])
         else:
             run(['git', 'remote', 'add', 'origin', repository])
