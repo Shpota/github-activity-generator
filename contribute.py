@@ -20,7 +20,6 @@ def main():
     frequency = args.frequency
     minus_date = args.start_date
     to_update = args.update
-    
     if bool(to_update):
         run(['git', 'clone', repository])
         os.chdir(directory)
@@ -29,7 +28,6 @@ def main():
         os.mkdir(directory)
         os.chdir(directory)
         run(['git', 'init'])
-        
     start_date = curr_date.replace(hour=20, minute=0) - timedelta(minus_date)
     for day in (start_date + timedelta(n) for n in range(minus_date)):
         if (not no_weekends or day.weekday() < 5) \
@@ -98,9 +96,11 @@ def arguments():
                         format. For example: git@github.com:user/repo.git or
                         https://github.com/user/repo.git""")
     parser.add_argument('-sd', '--start_date', type=int, default=366,
-                        required=False, help="""Defines the start date of commit""")
+                        required=False, help="""Defines the start date of
+                        commit""")
     parser.add_argument('-u', '--update', action='store_true', default=False,
-                        required=False, help="""Wheather is to update existing git""")
+                        required=False, help="""Wheather is to update existing
+                        git""")
     return parser.parse_args()
 
 
