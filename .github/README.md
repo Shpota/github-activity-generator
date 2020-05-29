@@ -1,13 +1,13 @@
-GitHub Activity Generator [![Gitter](https://badges.gitter.im/github-activity-generator/community.svg)](https://gitter.im/github-activity-generator/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.com/Shpota/github-activity-generator.svg?branch=master)](https://travis-ci.com/Shpota/github-activity-generator)
+GitHub Activity Generator [![Gitter](https://badges.gitter.im/github-activity-generator/community.svg)](https://gitter.im/github-activity-generator/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![build](https://github.com/Shpota/github-activity-generator/workflows/build/badge.svg)](https://github.com/Shpota/github-activity-generator/actions?query=workflow%3Abuild)
 =========================
 
-A script that helps you *instantly* generate a beautiful GitHub Activity Graph
+A script that helps you *instantly* generate a beautiful GitHub Contributions Graph
 for the last year.
 
 ### Before :neutral_face: :no_mouth: :unamused: 
-![Before](images/before.png)
+![Before](before.png)
 ### After :muscle: :relieved: :heart: :sunglasses: :metal: :horse: :wink: :fire: :dancer: :santa: :fireworks: :cherries: :tada:
-![After](images/after.png)
+![After](after.png)
 
 ## How to use
 1. Create an empty GitHub repository. Do not initialize it.
@@ -25,13 +25,16 @@ generating changes to the file for every day within the last year (0-20 commits
 per day). Once the commits are generated it links the created repository with
 the remote repository and pushes the changes.
 
-## Going incognito
-No one wants anybody to know that they are cheating. That is why the best option 
-is making the generated repository private. It is free on GitHub. You only need
-to set up your account 
+## Making contributions private
+Note: This script doesn't encourage you to cheat. Cheating is bad. But if anybody
+is judging your professional skills by the graph at your GitHub profile (which
+caries no value) they deserve to see a reach graph.
+
+For that matter, you might want to make the generated repository private. It is free
+on GitHub. Now, you only need to set up your account 
 [to show private contributions](https://help.github.com/en/articles/publicizing-or-hiding-your-private-contributions-on-your-profile).
-This way GitHub users will see that you made some changes, but they won't be
-able to see what exactly was changed.
+This way GitHub users will see that you contributed something, but they won't be
+able to see what exactly.
 
 ## Customizations
 You can customize how often to commit and how many commits a day to make, etc.
