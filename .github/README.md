@@ -28,7 +28,7 @@ the remote repository and pushes the changes.
 ## Making contributions private
 Note: This script doesn't encourage you to cheat. Cheating is bad. But if anybody
 is judging your professional skills by the graph at your GitHub profile (which
-caries no value) they deserve to see a reach graph.
+caries no value) they deserve to see a rich graph.
 
 For that matter, you might want to make the generated repository private. It is free
 on GitHub. Now, you only need to set up your account 
