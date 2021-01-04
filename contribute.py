@@ -40,7 +40,7 @@ def main():
 
     if repository is not None:
         run(['git', 'remote', 'add', 'origin', repository])
-        run(['git', 'push', '-u', 'origin', 'master'])
+        run(['git', 'push', '-u', 'origin', 'main'])
 
     print('\nRepository generation ' +
           '\x1b[6;30;42mcompleted successfully\x1b[0m!')
