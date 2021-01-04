@@ -94,11 +94,11 @@ def arguments():
                         to the repository. The link is accepted in SSH or HTTPS
                         format. For example: git@github.com:user/repo.git or
                         https://github.com/user/repo.git""")
-    parser.add_argument('-un', '--user-name', dest='user_name', type=str, 
-                        required=False, help="""An optional user.name 
+    parser.add_argument('-un', '--user-name', dest='user_name', type=str,
+                        required=False, help="""An optional user.name
                         to pass to git config of the repository""")
-    parser.add_argument('-ue', '--user-email', dest='user_email', type=str, 
-                        required=False, help="""An optional user.email 
+    parser.add_argument('-ue', '--user-email', dest='user_email', type=str,
+                        required=False, help="""An optional user.email
                         to pass to git config of the repository""")
     return parser.parse_args()
 
