@@ -12,6 +12,8 @@ def main():
     curr_date = datetime.now()
     directory = 'repository-' + curr_date.strftime('%Y-%m-%d-%H-%M-%S')
     repository = args.repository
+    user_name = args.user_name
+    user_email = args.user_email
     if repository is not None:
         start = repository.rfind('/') + 1
         end = repository.rfind('.')
@@ -21,6 +23,13 @@ def main():
     os.mkdir(directory)
     os.chdir(directory)
     run(['git', 'init'])
+
+    if user_name is not None:
+        run(['git', 'config', 'user.name', user_name])
+
+    if user_email is not None:
+        run(['git', 'config', 'user.email', user_email])
+
     start_date = curr_date.replace(hour=20, minute=0) - timedelta(366)
     for day in (start_date + timedelta(n) for n in range(366)):
         if (not no_weekends or day.weekday() < 5) \
@@ -85,6 +94,12 @@ def arguments():
                         to the repository. The link is accepted in SSH or HTTPS
                         format. For example: git@github.com:user/repo.git or
                         https://github.com/user/repo.git""")
+    parser.add_argument('-un', '--user_name', type=str, required=False,
+                        help="""Overrides user.name git config.
+                        If not specified, the global config is used.""")
+    parser.add_argument('-ue', '--user_email', type=str, required=False,
+                        help="""Overrides user.email git config.
+                        If not specified, the global config is used.""")
     return parser.parse_args()
 
 
