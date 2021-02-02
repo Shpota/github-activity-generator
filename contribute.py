@@ -40,6 +40,7 @@ def main():
 
     if repository is not None:
         run(['git', 'remote', 'add', 'origin', repository])
+        run(['git', 'branch', '-M', 'main'])
         run(['git', 'push', '-u', 'origin', 'main'])
 
     print('\nRepository generation ' +
