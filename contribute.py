@@ -104,7 +104,7 @@ def arguments(argsval):
     parser.add_argument('-ue', '--user_email', type=str, required=False,
                         help="""Overrides user.email git config.
                         If not specified, the global config is used.""")
-    return parser.parse_args()
+    return parser.parse_args(argsval)
 
 
 if __name__ == "__main__":
