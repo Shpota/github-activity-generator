@@ -17,8 +17,9 @@ class TestContribute(unittest.TestCase):
         self.assertTrue(1 <= contribute.contributions_per_day(args) <= 20)
 
     def test_commits(self):
+        contribute.NUM = 11 #limiting the number only for unittesting
         contribute.main(['-nw','--user_name=sampleusername','--user_email=your-username@users.noreply.github.com'])
-        self.assertTrue(1 <= int(check_output(['git', 'rev-list', '--count', 'HEAD']).decode('utf-8')) <=20*contribute.NUM_OF_DAYS)
+        self.assertTrue(1 <= int(check_output(['git', 'rev-list', '--count', 'HEAD']).decode('utf-8')) <=20*contribute.NUM)
         #git rev-list --count HEAD
 
         

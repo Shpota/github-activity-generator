@@ -7,7 +7,7 @@ from random import randint
 from subprocess import Popen
 import sys
 
-NUM_OF_DAYS = 10
+NUM = 366
 
 
 def main(def_args=sys.argv[1:]):
@@ -33,8 +33,8 @@ def main(def_args=sys.argv[1:]):
     if user_email is not None:
         run(['git', 'config', 'user.email', user_email])
 
-    start_date = curr_date.replace(hour=20, minute=0) - timedelta(NUM_OF_DAYS)
-    for day in (start_date + timedelta(n) for n in range(NUM_OF_DAYS)):
+    start_date = curr_date.replace(hour=20, minute=0) - timedelta(NUM)
+    for day in (start_date + timedelta(n) for n in range(NUM)):
         if (not no_weekends or day.weekday() < 5) \
                 and randint(0, 100) < frequency:
             for commit_time in (day + timedelta(minutes=m)
