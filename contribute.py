@@ -5,10 +5,12 @@ from datetime import datetime
 from datetime import timedelta
 from random import randint
 from subprocess import Popen
+import sys
 
+NUM_OF_DAYS = 10
 
-def main():
-    args = arguments()
+def main(def_args = sys.argv[1:]):
+    args = arguments(def_args)
     curr_date = datetime.now()
     directory = 'repository-' + curr_date.strftime('%Y-%m-%d-%H-%M-%S')
     repository = args.repository
@@ -30,8 +32,8 @@ def main():
     if user_email is not None:
         run(['git', 'config', 'user.email', user_email])
 
-    start_date = curr_date.replace(hour=20, minute=0) - timedelta(366)
-    for day in (start_date + timedelta(n) for n in range(366)):
+    start_date = curr_date.replace(hour=20, minute=0) - timedelta(NUM_OF_DAYS)
+    for day in (start_date + timedelta(n) for n in range(NUM_OF_DAYS)):
         if (not no_weekends or day.weekday() < 5) \
                 and randint(0, 100) < frequency:
             for commit_time in (day + timedelta(minutes=m)
@@ -72,7 +74,7 @@ def contributions_per_day(args):
     return randint(1, max_c)
 
 
-def arguments():
+def arguments(argsval):
     parser = argparse.ArgumentParser()
     parser.add_argument('-nw', '--no_weekends',
                         required=False, action='store_true', default=False,
