@@ -9,6 +9,7 @@ import sys
 
 NUM_OF_DAYS = 10
 
+
 def main(def_args=sys.argv[1:]):
     args = arguments(def_args)
     curr_date = datetime.now()
