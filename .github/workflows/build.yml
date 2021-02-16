@@ -18,6 +18,7 @@ jobs:
         run: |
           python -m py_compile contribute.py
           flake8 contribute.py
+          flake8 test_contribute.py
       - name: Test for commits
         run: |
           python -m unittest test_contribute
