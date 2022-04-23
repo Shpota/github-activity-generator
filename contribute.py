@@ -38,7 +38,8 @@ def main(def_args=sys.argv[1:]):
         run(['git', 'config', 'user.email', user_email])
 
     start_date = curr_date.replace(hour=20, minute=0) - timedelta(days_before)
-    for day in (start_date + timedelta(n) for n in range(days_before + days_after)):
+    for day in (start_date + timedelta(n) for n
+                in range(days_before + days_after)):
         if (not no_weekends or day.weekday() < 5) \
                 and randint(0, 100) < frequency:
             for commit_time in (day + timedelta(minutes=m)
@@ -109,16 +110,17 @@ def arguments(argsval):
                         help="""Overrides user.email git config.
                         If not specified, the global config is used.""")
     parser.add_argument('-db', '--days_before', type=int, default=365,
-                        required=False, help="""Specifies the number of days before
-                        the current date when the script will start adding commits.
-                        For example: if it is set to 30 the first commit date will
-                        be the current date minus 30 days.""")
-    parser.add_argument('-da', '--days_after', type=int, default=0,
-                        required=False, help="""Specifies the number of days after
-                        the current date until which the script will be adding
-                        commits. For example: if it is set to 30 the last commit
-                        will be on a future date which is the current date plus 30
+                        required=False, help="""Specifies the number of days
+                        before the current date when the script will start
+                        adding commits. For example: if it is set to 30 the
+                        first commit date will be the current date minus 30
                         days.""")
+    parser.add_argument('-da', '--days_after', type=int, default=0,
+                        required=False, help="""Specifies the number of days
+                        after the current date until which the script will be
+                        adding commits. For example: if it is set to 30 the
+                        last commit will be on a future date which is the
+                        current date plus 30 days.""")
     return parser.parse_args(argsval)
 
 
