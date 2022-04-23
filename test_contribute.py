@@ -21,10 +21,12 @@ class TestContribute(unittest.TestCase):
                          '--user_name=sampleusername',
                          '--user_email=your-username@users.noreply.github.com',
                          '-mc=12',
-                         '-fr=82'])
+                         '-fr=82',
+                         '-db=10',
+                         '-da=15'])
         self.assertTrue(1 <= int(check_output(
             ['git',
              'rev-list',
              '--count',
              'HEAD']
-        ).decode('utf-8')) <= 20*contribute.NUM)
+        ).decode('utf-8')) <= 20*(10 + 15))
