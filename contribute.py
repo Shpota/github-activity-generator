@@ -10,7 +10,7 @@ import sys
 
 def main(def_args=sys.argv[1:]):
     args = arguments(def_args)
-    curr_date = datetime.now()
+    curr_date = datetime.now() - timedelta(args.end_days_before)
     directory = 'repository-' + curr_date.strftime('%Y-%m-%d-%H-%M-%S')
     repository = args.repository
     user_name = args.user_name
@@ -121,6 +121,12 @@ def arguments(argsval):
                         adding commits. For example: if it is set to 30 the
                         last commit will be on a future date which is the
                         current date plus 30 days.""")
+    parser.add_argument('-edb', '--end_days_before', type=int, default=0,
+                        required=False, help="""Specifies the number of days
+                            before the current date when the script will finish
+                            adding commits. For example: if it is set to 30 the
+                            last commit date will be the current date minus 30
+                            days.""")
     return parser.parse_args(argsval)
 
 
