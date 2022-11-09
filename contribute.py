@@ -137,14 +137,14 @@ def arguments(argsval):
                         current date plus 30 days. This option ignores end_date.""")
     parser.add_argument('-sd', '--start_date', type=str, default=(datetime.now() - timedelta(365)).strftime('%Y-%m-%d'),
                         required=False, help="""Specifies the date to start adding
-                            commits. The format should be YYYY-MM-DD. This value 
-                            can be in future too. For example: 25-02-2019
-                            This option will get ignored if used with days_before""")
+                        commits. The format should be YYYY-MM-DD. This value 
+                        can be in future too. For example: 25-02-2019
+                        This option will get ignored if used with days_before""")
     parser.add_argument('-ed', '--end_date', type=str, default=datetime.now().strftime('%Y-%m-%d'),
                         required=False, help="""Specifies the last date to adding
-                            commits. The format should be YYYY-MM-DD. This value 
-                            can be in future too. For example 25-02-2019
-                            This option will get ignored if used with days_after""")
+                        commits. The format should be YYYY-MM-DD. This value 
+                        can be in future too. For example 25-02-2019
+                        This option will get ignored if used with days_after""")
     return parser.parse_args(argsval)
 
 
