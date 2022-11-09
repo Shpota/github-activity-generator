@@ -58,6 +58,12 @@ will keep committing.
 ```sh
 python contribute.py --days_before=10 --days_after=15
 ```
+Use `--end_days_before` to specify how many days before the current
+date the script should finish committing.
+
+```sh
+python contribute.py --end_days_before=5
+```
 
 Run `python contribute.py --help` to get help.
 
