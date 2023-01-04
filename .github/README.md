@@ -11,12 +11,13 @@ for the last year.
 
 ## How to use
 1. Create an empty GitHub repository. Do not initialize it.
-2. Download [the contribute.py script](https://github.com/Shpota/github-activity-generator/archive/master.zip) 
-and execute it passing the link on the created repository
+2. Clone the newly created repository to your local machine
+3. Download [the contribute.py script](https://github.com/Shpota/github-activity-generator/archive/master.zip) and move the files to your new directory
+4. Inside the directory of your new repo execute [the contribute.py script](https://github.com/Shpota/github-activity-generator/archive/master.zip) passing the reference of the newly created repository
 ```sh
 python contribute.py --repository=git@github.com:user/repo.git
 ```
-Now you have a repository with lots of changes in your GitHub account.
+The command will take a while to complete, now you have a repository with lots of changes in your GitHub account, you can confirm it on your new repo.
 Note: it takes several minutes for GitHub to reindex your activity.
 
 ## How it works
