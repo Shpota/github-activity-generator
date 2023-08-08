@@ -97,7 +97,7 @@ def arguments(argsval):
                         from 1 to N times a day. The exact number of commits
                         is defined randomly for each day. The default value
                         is 10.""")
-    parser.add_argument('-mic', '--min_commits', type=int, default=1,
+    parser.add_argument('-minc', '--min_commits', type=int, default=1,
                     required=False, help="""Defines the minimum amount of
                     commits a day the script can make. Accepts a number
                     from 1 to 20. If N is specified the script commits
