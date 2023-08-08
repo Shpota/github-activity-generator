@@ -90,7 +90,7 @@ def arguments(argsval):
     parser.add_argument('-nw', '--no_weekends',
                         required=False, action='store_true', default=False,
                         help="""do not commit on weekends""")
-    parser.add_argument('-mc', '--max_commits', type=int, default=10,
+    parser.add_argument('-maxc', '--max_commits', type=int, default=10,
                         required=False, help="""Defines the maximum amount of
                         commits a day the script can make. Accepts a number
                         from 1 to 20. If N is specified the script commits
