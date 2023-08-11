@@ -38,13 +38,24 @@ def main(def_args=sys.argv[1:]):
         run(['git', 'config', 'user.email', user_email])
 
     start_date = curr_date.replace(hour=20, minute=0) - timedelta(days_before)
+    if args.end_date:
+        end_date = datetime.strptime(args.end_date, '%Y-%m-%d')
+        total_days = (end_date - start_date).days + 1  # Add 1 to ensure the inclusion of the end date.
+    else:
+        total_days = days_before + days_after
     for day in (start_date + timedelta(n) for n
-                in range(days_before + days_after)):
+                in range(total_days)):
         if (not no_weekends or day.weekday() < 5) \
                 and randint(0, 100) < frequency:
             for commit_time in (day + timedelta(minutes=m)
                                 for m in range(contributions_per_day(args))):
                 contribute(commit_time)
+
+    if args.end_date:
+        end_date = datetime.strptime(args.end_date, '%Y-%m-%d')
+        total_days = (end_date - start_date).days
+    else:
+        total_days = days_before + days_after
 
     if repository is not None:
         run(['git', 'remote', 'add', 'origin', repository])
@@ -121,6 +132,8 @@ def arguments(argsval):
                         adding commits. For example: if it is set to 30 the
                         last commit will be on a future date which is the
                         current date plus 30 days.""")
+    parser.add_argument('-ed', '--end_date', type=str, required=False,
+                        help="Specifies the end date for commits in the format YYYY-MM-DD.")
     return parser.parse_args(argsval)
 
 
