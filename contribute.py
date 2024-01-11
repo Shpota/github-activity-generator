@@ -25,8 +25,8 @@ def main(def_args=sys.argv[1:]):
     if days_before < 0:
         sys.exit('days_before must not be negative')
     days_after = args.days_after
-    if days_after < 0:
-        sys.exit('days_after must not be negative')
+    if days_after + days_before < 0:
+        sys.exit('The absolute value of days_after cannot exceed the value of days_before')
     os.mkdir(directory)
     os.chdir(directory)
     run(['git', 'init', '-b', 'main'])
@@ -38,12 +38,10 @@ def main(def_args=sys.argv[1:]):
         run(['git', 'config', 'user.email', user_email])
 
     start_date = curr_date.replace(hour=20, minute=0) - timedelta(days_before)
-    for day in (start_date + timedelta(n) for n
-                in range(days_before + days_after)):
-        if (not no_weekends or day.weekday() < 5) \
-                and randint(0, 100) < frequency:
-            for commit_time in (day + timedelta(minutes=m)
-                                for m in range(contributions_per_day(args))):
+    end_date = curr_date + timedelta(days_after)
+    for day in (start_date + timedelta(n) for n in range((end_date - start_date).days)):
+        if (not no_weekends or day.weekday() < 5) and randint(0, 100) < frequency:
+            for commit_time in (day + timedelta(minutes=m) for m in range(contributions_per_day(args))):
                 contribute(commit_time)
 
     if repository is not None:
@@ -118,9 +116,8 @@ def arguments(argsval):
     parser.add_argument('-da', '--days_after', type=int, default=0,
                         required=False, help="""Specifies the number of days
                         after the current date until which the script will be
-                        adding commits. For example: if it is set to 30 the
-                        last commit will be on a future date which is the
-                        current date plus 30 days.""")
+                        adding commits. Negative values are allowed and indicate
+                        the script should stop committing before the current date.""")
     return parser.parse_args(argsval)
 
 
