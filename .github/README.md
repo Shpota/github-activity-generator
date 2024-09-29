@@ -58,7 +58,16 @@ will keep committing.
 ```sh
 python contribute.py --days_before=10 --days_after=15
 ```
+Use `--start_date` to specify start date of commits. This option doesn't work if used with days_before.
 
+```sh
+python contribute.py --start_date=2019-05-14
+```
+Use `--end_date` to specify end date of commits. This option doesn't work if used with days_after.
+
+```sh
+python contribute.py --end_end=2019-07-22
+```
 Run `python contribute.py --help` to get help.
 
 ## System requirements

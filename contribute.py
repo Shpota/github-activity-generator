@@ -1,15 +1,22 @@
 #!/usr/bin/env python
 import argparse
 import os
+import sys
 from datetime import datetime
 from datetime import timedelta
 from random import randint
 from subprocess import Popen
-import sys
 
 
 def main(def_args=sys.argv[1:]):
     args = arguments(def_args)
+    try:
+        start_date = datetime.strptime(args.start_date, "%Y-%m-%d")
+        end_date = datetime.strptime(args.end_date, "%Y-%m-%d")
+    except ValueError:
+        sys.exit('Date format is not correct. Please use YYY-MM-DD format.')
+
+
     curr_date = datetime.now()
     directory = 'repository-' + curr_date.strftime('%Y-%m-%d-%H-%M-%S')
     repository = args.repository
@@ -22,11 +29,16 @@ def main(def_args=sys.argv[1:]):
     no_weekends = args.no_weekends
     frequency = args.frequency
     days_before = args.days_before
+    days_after = args.days_after
     if days_before < 0:
         sys.exit('days_before must not be negative')
-    days_after = args.days_after
+    if days_before > 0:
+        start_date = curr_date - timedelta(days_before)
     if days_after < 0:
         sys.exit('days_after must not be negative')
+    if days_after > 0:
+        end_date = curr_date + timedelta(days_before)
+    start_date.replace(hour=20, minute=0)
     os.mkdir(directory)
     os.chdir(directory)
     run(['git', 'init', '-b', 'main'])
@@ -37,14 +49,15 @@ def main(def_args=sys.argv[1:]):
     if user_email is not None:
         run(['git', 'config', 'user.email', user_email])
 
-    start_date = curr_date.replace(hour=20, minute=0) - timedelta(days_before)
-    for day in (start_date + timedelta(n) for n
-                in range(days_before + days_after)):
-        if (not no_weekends or day.weekday() < 5) \
+    delta = timedelta(days=1)
+
+    while start_date <= end_date:
+        if (not no_weekends or start_date.weekday() < 5) \
                 and randint(0, 100) < frequency:
-            for commit_time in (day + timedelta(minutes=m)
+            for commit_time in (start_date + timedelta(minutes=m)
                                 for m in range(contributions_per_day(args))):
                 contribute(commit_time)
+        start_date += delta
 
     if repository is not None:
         run(['git', 'remote', 'add', 'origin', repository])
@@ -53,6 +66,7 @@ def main(def_args=sys.argv[1:]):
 
     print('\nRepository generation ' +
           '\x1b[6;30;42mcompleted successfully\x1b[0m!')
+
 
 
 def contribute(date):
@@ -109,18 +123,28 @@ def arguments(argsval):
     parser.add_argument('-ue', '--user_email', type=str, required=False,
                         help="""Overrides user.email git config.
                         If not specified, the global config is used.""")
-    parser.add_argument('-db', '--days_before', type=int, default=365,
+    parser.add_argument('-db', '--days_before', type=int, default=0,
                         required=False, help="""Specifies the number of days
                         before the current date when the script will start
                         adding commits. For example: if it is set to 30 the
                         first commit date will be the current date minus 30
-                        days.""")
+                        days. This option ignores start_date.""")
     parser.add_argument('-da', '--days_after', type=int, default=0,
                         required=False, help="""Specifies the number of days
                         after the current date until which the script will be
                         adding commits. For example: if it is set to 30 the
                         last commit will be on a future date which is the
-                        current date plus 30 days.""")
+                        current date plus 30 days. This option ignores end_date.""")
+    parser.add_argument('-sd', '--start_date', type=str, default=(datetime.now() - timedelta(365)).strftime('%Y-%m-%d'),
+                        required=False, help="""Specifies the date to start adding
+                        commits. The format should be YYYY-MM-DD. This value 
+                        can be in future too. For example: 25-02-2019
+                        This option will get ignored if used with days_before""")
+    parser.add_argument('-ed', '--end_date', type=str, default=datetime.now().strftime('%Y-%m-%d'),
+                        required=False, help="""Specifies the last date to adding
+                        commits. The format should be YYYY-MM-DD. This value 
+                        can be in future too. For example 25-02-2019
+                        This option will get ignored if used with days_after""")
     return parser.parse_args(argsval)
 
 
