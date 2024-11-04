@@ -4,6 +4,12 @@ GitHub Activity Generator [![Gitter](https://badges.gitter.im/github-activity-ge
 A script that helps you *instantly* generate a beautiful GitHub Contributions Graph
 for the last year.
 
+## ⚠ Disclaimer
+This script doesn't encourage you to cheat. Cheating is bad. But if anybody judges your professional skills by
+the graph on your GitHub profile (which carries no value), they deserve to see a rich graph.
+
+## What it looks like
+
 ### Before :neutral_face: :no_mouth: :unamused: 
 ![Before](before.png)
 ### After :muscle: :relieved: :heart: :sunglasses: :metal: :horse: :wink: :fire: :dancer: :santa: :fireworks: :cherries: :tada:
@@ -26,12 +32,9 @@ per day). Once the commits are generated it links the created repository with
 the remote repository and pushes the changes.
 
 ## Making contributions private
-Note: This script doesn't encourage you to cheat. Cheating is bad. But if anybody
-is judging your professional skills by the graph at your GitHub profile (which
-caries no value) they deserve to see a rich graph.
 
-For that matter, you might want to make the generated repository private. It is free
-on GitHub. Now, you only need to set up your account 
+You might want to make the generated repository private. It is free
+on GitHub. You only need to set up your account 
 [to show private contributions](https://help.github.com/en/articles/publicizing-or-hiding-your-private-contributions-on-your-profile).
 This way GitHub users will see that you contributed something, but they won't be
 able to see what exactly.
