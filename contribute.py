@@ -9,9 +9,18 @@ import sys
 
 
 def main(def_args=sys.argv[1:]):
+    """
+    Main function to parse arguments, create a new Git repository, and generate commits
+    based on specified options. The function configures the repository, handles custom
+    user settings, and iterates over a date range to add commits on selected days.
+    """
+
+    
     args = arguments(def_args)
     curr_date = datetime.now()
     directory = 'repository-' + curr_date.strftime('%Y-%m-%d-%H-%M-%S')
+
+    # Use repository name as directory name if provided
     repository = args.repository
     user_name = args.user_name
     user_email = args.user_email
@@ -19,6 +28,8 @@ def main(def_args=sys.argv[1:]):
         start = repository.rfind('/') + 1
         end = repository.rfind('.')
         directory = repository[start:end]
+
+    # Validate date range inputs
     no_weekends = args.no_weekends
     frequency = args.frequency
     days_before = args.days_before
@@ -27,25 +38,33 @@ def main(def_args=sys.argv[1:]):
     days_after = args.days_after
     if days_after < 0:
         sys.exit('days_after must not be negative')
+
+    # Create and initialize the repository directory
     os.mkdir(directory)
     os.chdir(directory)
     run(['git', 'init', '-b', 'main'])
 
+    # Set Git user configuration if specified
     if user_name is not None:
         run(['git', 'config', 'user.name', user_name])
 
     if user_email is not None:
         run(['git', 'config', 'user.email', user_email])
 
+    # Define the starting date for commits
     start_date = curr_date.replace(hour=20, minute=0) - timedelta(days_before)
+
+    # Loop through each day in the specified date range
     for day in (start_date + timedelta(n) for n
                 in range(days_before + days_after)):
+        # Check frequency and weekend setting to decide if commits should be made on a given day            
         if (not no_weekends or day.weekday() < 5) \
                 and randint(0, 100) < frequency:
             for commit_time in (day + timedelta(minutes=m)
                                 for m in range(contributions_per_day(args))):
                 contribute(commit_time)
 
+    # Add remote repository and push commits if a repository URL is provided
     if repository is not None:
         run(['git', 'remote', 'add', 'origin', repository])
         run(['git', 'branch', '-M', 'main'])
@@ -56,6 +75,11 @@ def main(def_args=sys.argv[1:]):
 
 
 def contribute(date):
+    """
+    Creates a commit at a specific date and time by appending to README.md,
+    staging the change, and setting the commit date.
+    """
+
     with open(os.path.join(os.getcwd(), 'README.md'), 'a') as file:
         file.write(message(date) + '\n\n')
     run(['git', 'add', '.'])
@@ -64,14 +88,28 @@ def contribute(date):
 
 
 def run(commands):
+    """
+    Execute a shell command and wait for it to complete. 
+    This function wraps subprocess.Popen to run Git commands synchronously.
+    """
+    
     Popen(commands).wait()
 
 
 def message(date):
+    """
+    Formats a standardized commit message with a timestamp.
+    """
+    
     return date.strftime('Contribution: %Y-%m-%d %H:%M')
 
 
 def contributions_per_day(args):
+    """
+    Determines the number of commits to make on a single day, within the range set
+    by `max_commits` (capped at 1-20).
+    """
+    
     max_c = args.max_commits
     if max_c > 20:
         max_c = 20
@@ -81,6 +119,11 @@ def contributions_per_day(args):
 
 
 def arguments(argsval):
+    """
+    Parses command-line arguments to configure the script, including commit frequency,
+    max commits per day, repository URL, commit range, and whether to skip weekends.
+    """
+    
     parser = argparse.ArgumentParser()
     parser.add_argument('-nw', '--no_weekends',
                         required=False, action='store_true', default=False,
