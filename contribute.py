@@ -22,11 +22,27 @@ def main(def_args=sys.argv[1:]):
     no_weekends = args.no_weekends
     frequency = args.frequency
     days_before = args.days_before
+    days_after = args.days_after
+    days_duration = args.days_duration
+
+    # Validate days_after and days_duration conflict
+    if days_after > 0 and days_duration > 0:
+        sys.exit("Cannot use both --days_after and --days_duration together, as they conflict.")
+
     if days_before < 0:
         sys.exit('days_before must not be negative')
-    days_after = args.days_after
     if days_after < 0:
         sys.exit('days_after must not be negative')
+    if days_duration < 0:
+        sys.exit('days_duration must not be negative')
+
+    # Set commit range based on days_before and days_after/days_duration
+    if days_duration > 0:
+        commit_days = days_before - days_duration  # Adjust commit_days logic
+        end_date = curr_date - timedelta(days=commit_days)
+    else:
+        end_date = curr_date + timedelta(days=days_after)
+
     os.mkdir(directory)
     os.chdir(directory)
     run(['git', 'init', '-b', 'main'])
@@ -38,8 +54,7 @@ def main(def_args=sys.argv[1:]):
         run(['git', 'config', 'user.email', user_email])
 
     start_date = curr_date.replace(hour=20, minute=0) - timedelta(days_before)
-    for day in (start_date + timedelta(n) for n
-                in range(days_before + days_after)):
+    for day in (start_date + timedelta(n) for n in range((end_date - start_date).days + 1)):
         if (not no_weekends or day.weekday() < 5) \
                 and randint(0, 100) < frequency:
             for commit_time in (day + timedelta(minutes=m)
@@ -121,6 +136,10 @@ def arguments(argsval):
                         adding commits. For example: if it is set to 30 the
                         last commit will be on a future date which is the
                         current date plus 30 days.""")
+    parser.add_argument('-dd', '--days_duration', type=int, default=0,
+                        required=False, help="""Specifies the number of days
+                        after the days_before period for which commits will be
+                        added. Cannot be used together with --days_after.""")
     return parser.parse_args(argsval)
 
 
