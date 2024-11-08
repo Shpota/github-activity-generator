@@ -27,6 +27,16 @@ def main(def_args=sys.argv[1:]):
     days_after = args.days_after
     if days_after < 0:
         sys.exit('days_after must not be negative')
+    def unique_directory_name(base_name):
+        """Generates a unique directory name by appending a number if needed."""
+        new_dir = base_name
+        count = 1
+        while os.path.exists(new_dir):
+            new_dir = f"{base_name}-{count}"
+            count += 1
+        return new_dir
+
+    directory = unique_directory_name(directory)
     os.mkdir(directory)
     os.chdir(directory)
     run(['git', 'init', '-b', 'main'])
