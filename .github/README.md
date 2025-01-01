@@ -33,6 +33,11 @@ and execute it passing the link on the created repository
 ```sh
 python contribute.py --repository=git@github.com:user/repo.git
 ```
+or 
+
+```sh
+python contribute.py --repository=https://github.com/user/repo.git
+```
 Now you have a repository with lots of changes in your GitHub account.
 Note: it takes several minutes for GitHub to reindex your activity.
 
