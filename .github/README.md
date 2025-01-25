@@ -5,8 +5,7 @@ A script that helps you *instantly* generate a beautiful GitHub Contributions Gr
 for the last year.
 
 ## ⚠ Disclaimer
-This script doesn't encourage you to cheat. Cheating is bad. But if anybody judges your professional skills by
-the graph on your GitHub profile (which carries no value), they deserve to see a rich graph.
+This script doesn't encourage you to cheat. Cheating is bad.
 
 ## Check my other projects
 
@@ -79,6 +78,7 @@ Run `python contribute.py --help` to get help.
 To be able to execute the script you need to have Python and Git installed.
 
 ## Troubleshooting
+
 #### I performed the script but my GitHub activity is still the same.
 It might take several minutes for GitHub to reindex your activity. Check
 if the repository has new commits and wait a couple of minutes.
