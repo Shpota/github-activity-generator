@@ -5,7 +5,8 @@ A script that helps you *instantly* generate a beautiful GitHub Contributions Gr
 for the last year.
 
 ## ⚠ Disclaimer
-This script doesn't encourage you to cheat. Cheating is bad.
+
+This script is for educational purposes and demonstrating GitHub mechanics. It should not be used to misrepresent professional contributions or coding activity.
 
 ## Check my other projects
 
@@ -40,14 +41,6 @@ The script initializes an empty git repository, creates a text file and starts
 generating changes to the file for every day within the last year (0-20 commits 
 per day). Once the commits are generated it links the created repository with
 the remote repository and pushes the changes.
-
-## Making contributions private
-
-You might want to make the generated repository private. It is free
-on GitHub. You only need to set up your account 
-[to show private contributions](https://help.github.com/en/articles/publicizing-or-hiding-your-private-contributions-on-your-profile).
-This way GitHub users will see that you contributed something, but they won't be
-able to see what exactly.
 
 ## Customizations
 You can customize how often to commit and how many commits a day to make, etc.
